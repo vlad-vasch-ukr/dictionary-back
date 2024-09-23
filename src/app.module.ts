@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
-import { User } from './modules/user/entities/user.entity';
+import { User } from './database/entities/user.entity';
 
 @Module({
   imports: [
@@ -26,6 +26,7 @@ import { User } from './modules/user/entities/user.entity';
         entities: [User],
       }),
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController],
   providers: [AppService],

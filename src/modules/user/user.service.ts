@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { User } from '../../database/entities/user.entity';
+import { DatabaseService } from '../../database/postgres-db.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    private readonly userRepository: DatabaseService<User>,
   ) {}
 
-  async findByEmail(email: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { email } });
+  async findAll(): Promise<User[] | undefined> {
+    return this.userRepository.findAll();
   }
 }
